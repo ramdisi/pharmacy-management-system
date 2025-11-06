@@ -13,9 +13,6 @@ public class LoginController {
     @FXML
     private JFXTextField txt_username;
 
-    @FXML
-    void btn_onActon_login(ActionEvent event) {
-
+    public void btn_onAction_login(ActionEvent actionEvent) {
     }
-
 }
