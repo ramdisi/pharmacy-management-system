@@ -46,7 +46,7 @@
                   <Font name="Book Antiqua Bold Italic" size="22.0" />
                </font>
             </Label>
-            <ImageView fitHeight="60.0" fitWidth="60.0" onDragDetected="#img_onAction_logout" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <ImageView fitHeight="60.0" fitWidth="60.0" onMouseClicked="#img_onClick_logout" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <image>
                   <Image url="@../images/logout_icon.png" />
                </image>
@@ -109,7 +109,7 @@
                               <Insets bottom="10.0" />
                            </padding>
                         </JFXButton>
-                        <ImageView fitHeight="50.0" fitWidth="200.0" onDragDetected="#img_onAction_notifications" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                        <ImageView fitHeight="50.0" fitWidth="200.0" onMouseClicked="#img_onClick_viewNotifications" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                            <image>
                               <Image url="@../images/alert_triangle_icon.png" />
                            </image>

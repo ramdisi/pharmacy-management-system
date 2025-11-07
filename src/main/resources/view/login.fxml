@@ -68,7 +68,7 @@
                   <Font name="Agency FB Bold" size="27.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="92.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <ImageView fitHeight="92.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <image>
                   <Image url="@../images/user_check_icon.png" />
                </image>

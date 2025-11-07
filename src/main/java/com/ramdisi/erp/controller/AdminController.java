@@ -39,12 +39,12 @@ public class AdminController {
     }
 
     @FXML
-    void img_onAction_logout(MouseEvent event) {
+    void img_onClick_logout(MouseEvent event) {
 
     }
 
     @FXML
-    void img_onAction_notifications(MouseEvent event) {
+    void img_onClick_viewNotifications(MouseEvent event) {
 
     }
 
