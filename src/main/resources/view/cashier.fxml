@@ -19,7 +19,6 @@
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="607.0" HBox.hgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="72.0" vgrow="ALWAYS" />
@@ -91,7 +90,7 @@
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txt_qty" prefHeight="37.0" prefWidth="395.0" style="-fx-background-color: #EEEEEE;" unFocusColor="#00adb5" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                  <JFXTextField fx:id="txt_qty" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="395.0" style="-fx-background-color: #EEEEEE;" unFocusColor="#00adb5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin></JFXTextField>
@@ -124,7 +123,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </TableView>
-                  <JFXButton fx:id="btn_addToCart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btn_onAction_addToCart" style="-fx-background-color: #00ADB5;" text="Add selected item to Cart" textFill="#eeeeee" wrapText="true" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                  <JFXButton fx:id="btn_addToCart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btn_onAction_addToCart" style="-fx-background-color: #00ADB5;" text="Add selected item to Cart" textFill="#eeeeee" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="15.0" />
                      </font>
@@ -132,7 +131,7 @@
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                      </opaqueInsets>
                      <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </GridPane.margin>
                   </JFXButton>
                   <JFXTextField fx:id="txt_search" focusColor="#4d4d4d" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onInputMethodTextChanged="#txt_onTextChange_search" prefHeight="35.0" prefWidth="482.0" style="-fx-background-color: #EEEEEE; -fx-background-radius: 20;" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
