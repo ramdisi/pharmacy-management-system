@@ -1,3 +1,5 @@
+package com.ramdisi.erp.controller;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -7,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
-public class PleaseProvideControllerClassName {
+public class CheckoutController {
 
     @FXML
     private JFXButton btn_addAnotherItemToBill;

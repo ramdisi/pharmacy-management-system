@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="244.0" prefWidth="467.0" style="-fx-background-color: #222831;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ramdisi.erp.controller.PopupMassageController">
+   <children>
+      <Label fx:id="lbl_massageArea" layoutX="29.0" layoutY="23.0" prefHeight="151.0" prefWidth="410.0" text="OOPs! Something went wrong or Order Placed Or something here" textAlignment="JUSTIFY" textFill="#eeeeee" wrapText="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="29.0" layoutY="195.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btn_onAction_ok" prefHeight="25.0" prefWidth="402.0" style="-fx-background-color: #00ADB5;" text="OK" textFill="#eeeeee">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
