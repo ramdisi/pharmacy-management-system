@@ -52,8 +52,9 @@ public class LoginController {
             popup.setWindow("Oops something went wrong \nError id : 001");
         } catch (SQLException e) {
             popup.setWindow("Oops something went wrong \nError id : 002");
+        }finally {
+            txt_password.setText(null);
+            txt_username.setText(null);
         }
-        txt_password.setText(null);
-        txt_username.setText(null);
     }
 }

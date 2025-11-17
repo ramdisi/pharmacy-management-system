@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class CashierController {
@@ -55,27 +55,27 @@ public class CashierController {
     private JFXTextField txt_search;
 
     @FXML
-    void btn_onAction_addToCart(ActionEvent event) {
+    private void btn_onAction_addToCart(ActionEvent event) {
 
     }
 
     @FXML
-    void btn_onAction_cancelOrder(ActionEvent event) {
+    private void btn_onAction_cancelOrder(ActionEvent event) {
 
     }
 
     @FXML
-    void btn_onAction_checkout(ActionEvent event) {
+    private void btn_onAction_checkout(ActionEvent event) {
 
     }
 
     @FXML
-    void btn_onAction_clearSearch(ActionEvent event) {
+    private void btn_onAction_clearSearch(ActionEvent event) {
 
     }
 
     @FXML
-    void img_onClick_logout(MouseEvent event) {
+    private void img_onClick_logout(MouseEvent event) {
 
     }
 
@@ -85,7 +85,7 @@ public class CashierController {
     }
 
     @FXML
-    void txt_onTextChange_search(InputMethodEvent event) {
+    void txt_onKeyPressed_search(KeyEvent event) {
 
     }
 
