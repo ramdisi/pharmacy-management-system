@@ -2,15 +2,33 @@ package com.ramdisi.erp.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.ramdisi.erp.model.dto.CashierStockDTO;
+import com.ramdisi.erp.service.CashierService;
+import com.ramdisi.erp.service.impl.CashierServiceImpl;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
-public class CashierController {
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class CashierController implements Initializable {
 
     @FXML
     private JFXButton btn_addToCart;
@@ -28,7 +46,7 @@ public class CashierController {
     private TableColumn<?, ?> col_batchId;
 
     @FXML
-    private TableColumn<?, ?> col_exp;
+    private TableColumn<?, ?> col_availableQTY;
 
     @FXML
     private TableColumn<?, ?> col_name;
@@ -46,13 +64,21 @@ public class CashierController {
     private Label lbl_time;
 
     @FXML
-    private TableView<?> table_Items;
+    private TableView<CashierStockDTO> table_Items;
 
     @FXML
     private JFXTextField txt_qty;
 
     @FXML
     private JFXTextField txt_search;
+
+    private static Stage currentStage;
+
+    private CashierService cashierService = new CashierServiceImpl();
+
+    private ObservableList<CashierStockDTO> stockDTOS;
+
+    private PopupMassageController popup=new PopupMassageController();
 
     @FXML
     private void btn_onAction_addToCart(ActionEvent event) {
@@ -76,7 +102,8 @@ public class CashierController {
 
     @FXML
     private void img_onClick_logout(MouseEvent event) {
-
+        currentStage.close();
+        LoginController.showCurrentStage();
     }
 
     @FXML
@@ -88,5 +115,34 @@ public class CashierController {
     void txt_onKeyPressed_search(KeyEvent event) {
 
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        runClock();
+        loadTable();
+    }
 
+    private void loadTable() {
+        try {
+            stockDTOS = cashierService.getAllStockDetails();
+            col_availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+            col_availableQTY.setCellValueFactory(new PropertyValueFactory<>("availableQTY"));
+            col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+            col_batchId.setCellValueFactory(new PropertyValueFactory<>("batchid"));
+            col_shelfNo.setCellValueFactory(new PropertyValueFactory<>("shelf_no"));
+            col_pricePerItem.setCellValueFactory(new PropertyValueFactory<>("pricePerItem"));
+            table_Items.setItems(stockDTOS);
+        } catch (SQLException e) {
+            popup.setWindow("Oops Cant load Table \n error id : 003");
+        }
+    }
+
+    private void runClock() {
+        lbl_time.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("hh : mm  a")));
+        Timeline clockJob = new Timeline(new KeyFrame(Duration.minutes(1), e-> lbl_time.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("hh : mm  a")))));
+        clockJob.setCycleCount(Animation.INDEFINITE);
+        clockJob.play();
+    }
+    public static void saveCurrentStage(Stage stage){
+        currentStage=stage;
+    }
 }

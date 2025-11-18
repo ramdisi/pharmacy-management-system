@@ -20,6 +20,8 @@ public class LoginController {
 
     private PopupMassageController popup= new PopupMassageController();
 
+    private static Stage currentStage;
+
     @FXML
     private JFXPasswordField txt_password;
 
@@ -35,15 +37,19 @@ public class LoginController {
                 case 1:
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin.fxml"))));
                     stage.show();
+                    currentStage.close();
                     //update this after creating super admin UI
                     break;
                 case 2:
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin.fxml"))));
                     stage.show();
+                    currentStage.close();
                     break;
                 case 3:
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/cashier.fxml"))));
                     stage.show();
+                    CashierController.saveCurrentStage(stage);
+                    currentStage.close();
                     break;
                 default:
                     popup.setWindow("Invalid Username or Password \nPlease Try again");
@@ -56,5 +62,11 @@ public class LoginController {
             txt_password.setText(null);
             txt_username.setText(null);
         }
+    }
+    public static void saveCurrentStage(Stage stage){
+        currentStage = stage;
+    }
+    public static void showCurrentStage(){
+        currentStage.show();
     }
 }
