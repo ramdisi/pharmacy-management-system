@@ -46,9 +46,10 @@ public class LoginController {
                     currentStage.close();
                     break;
                 case 3:
+                    CashierController.saveCurrentStage(stage);
+                    CashierController.setCashierDetails(new UserDTO(txt_username.getText(),txt_password.getText()));
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/cashier.fxml"))));
                     stage.show();
-                    CashierController.saveCurrentStage(stage);
                     currentStage.close();
                     break;
                 default:
