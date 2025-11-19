@@ -77,6 +77,9 @@ public class CashierController implements Initializable {
     @FXML
     private JFXTextField txt_search;
 
+    @FXML
+    private Label lbl_selectedItem;
+
     private static Stage currentStage;
 
     private CashierService cashierService = new CashierServiceImpl();
@@ -146,6 +149,7 @@ public class CashierController implements Initializable {
     @FXML
     void table_onClick_selectItem(MouseEvent event) {
         selectedItem = table_Items.getSelectionModel().getSelectedItem();
+        lbl_selectedItem.setText("Selected Item : "+selectedItem.getName());
     }
 
     @FXML
@@ -181,6 +185,7 @@ public class CashierController implements Initializable {
     }
 
     private void loadTable() {
+        lbl_selectedItem.setText("Selected Item : None");
         stockDTOS.clear();
         try {
             stockDTOS = cashierService.getAllStockDetails();
