@@ -15,7 +15,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -92,17 +95,40 @@ public class CashierController implements Initializable {
 
     private CashierStockDTO selectedItem;
 
-    private List<CartDTO> cartList = new ArrayList<>();
+    private static ObservableList<CartDTO> cartList = FXCollections.observableArrayList();
 
     private static UserDTO cashierAuth;
 
+    private Stage checkoutStage = new Stage();
+
     @FXML
     private void btn_onAction_addToCart(ActionEvent event) {
-        if (txt_qty.getText()!=null) {
+        if (txt_qty.getText()!=null && selectedItem!=null) {
             switch (Validator.checkEligabilityToOrder(selectedItem, Integer.parseInt(txt_qty.getText()))) {
                 case 0:
-                    popup.setWindow(selectedItem.getName()+" : "+txt_qty.getText()+"\nadded to cart succesfully \uD83D\uDE0A");
-                    cartList.add(new CartDTO(selectedItem, Integer.parseInt(txt_qty.getText())));
+                    int indexOfExistingItem=-1;
+                    int index=0;
+                    for (CartDTO cartItem : cartList){
+                        if (cartItem.getId().equals(selectedItem.getId())){
+                            indexOfExistingItem = index;
+                            break;
+                        }
+                        index++;
+                    }
+                    if (indexOfExistingItem == -1) {
+                        popup.setWindow(selectedItem.getName()+" : "+txt_qty.getText()+"\nadded to cart succesfully \uD83D\uDE0A");
+                        cartList.add(new CartDTO(
+                                selectedItem.getId(),
+                                selectedItem.getBatchid(),
+                                selectedItem.getName(),
+                                selectedItem.getPricePerItem(),
+                                Integer.parseInt(txt_qty.getText()),
+                                selectedItem.getPricePerItem()*Integer.parseInt(txt_qty.getText())
+                        ));
+                    }else {
+                        popup.setWindow("Already added "+selectedItem.getName()+" updated Quntity to "+txt_qty.getText()+" \uD83D\uDE0A");
+                        cartList.get(indexOfExistingItem).setPurchsedQTY(Integer.parseInt(txt_qty.getText()));
+                    }
                     txt_search.setText(null);
                     txt_qty.setText(null);
                     loadTable();
@@ -118,7 +144,7 @@ public class CashierController implements Initializable {
                     loadTable();
             }
         }else {
-            popup.setWindow("Please enter Quantity before add to Cart");
+            popup.setWindow("Please Select Item and enter Quantity before add to Cart");
         }
     }
 
@@ -132,7 +158,16 @@ public class CashierController implements Initializable {
 
     @FXML
     private void btn_onAction_checkout(ActionEvent event) {
-
+        try {
+            if (cartList.size()>0) {
+                CheckoutController.saveDetails(checkoutStage, cartList, cashierAuth);
+                checkoutStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/checkout.fxml"))));
+                checkoutStage.show();
+                currentStage.close();
+            }
+        } catch (IOException e) {
+            popup.setWindow("Oops something went wrong \n Error id : 004");
+        }
     }
 
     @FXML
@@ -186,6 +221,7 @@ public class CashierController implements Initializable {
 
     private void loadTable() {
         lbl_selectedItem.setText("Selected Item : None");
+        selectedItem = null;
         stockDTOS.clear();
         try {
             stockDTOS = cashierService.getAllStockDetails();
@@ -197,7 +233,7 @@ public class CashierController implements Initializable {
             col_pricePerItem.setCellValueFactory(new PropertyValueFactory<>("pricePerItem"));
             table_Items.setItems(stockDTOS);
         } catch (SQLException e) {
-            popup.setWindow("Oops Cant load Table \n error id : 003");
+            popup.setWindow("Oops Cant load Table \n Error id : 003");
         }
     }
 
@@ -212,5 +248,11 @@ public class CashierController implements Initializable {
     }
     public static void setCashierDetails(UserDTO user){
         cashierAuth = user;
+    }
+    public static void showCurrentStage(){
+        currentStage.show();
+    }
+    public static void cancelOrder(){
+        cartList.clear();
     }
 }

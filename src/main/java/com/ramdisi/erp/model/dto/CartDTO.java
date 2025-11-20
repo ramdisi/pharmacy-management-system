@@ -7,6 +7,10 @@ import lombok.*;
 @Setter
 @Getter
 public class CartDTO {
-    private CashierStockDTO orderedItem;
-    private Integer itemQTY;
+    private String id;
+    private String batchid;
+    private String name;
+    private Double pricePerItem;
+    private Integer purchsedQTY;
+    private Double total;
 }

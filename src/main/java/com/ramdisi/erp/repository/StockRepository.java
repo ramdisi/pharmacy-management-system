@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface StockRepository {
     List<Stock> getAll() throws SQLException;
+
+    boolean updateQTY(String id, Integer purchsedQTY) throws SQLException;
 }

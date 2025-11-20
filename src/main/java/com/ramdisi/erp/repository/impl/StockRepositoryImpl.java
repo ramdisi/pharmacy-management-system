@@ -5,6 +5,7 @@ import com.ramdisi.erp.model.entity.Stock;
 import com.ramdisi.erp.repository.StockRepository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,5 +37,14 @@ public class StockRepositoryImpl implements StockRepository {
             ));
         }
         return stockList;
+    }
+
+    @Override
+    public boolean updateQTY(String id, Integer purchsedQTY) throws SQLException{
+        Connection connection = DBConection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("update stock set qty_on_hand=qty_on_hand-? where stock_id=?");
+        preparedStatement.setString(2,id);
+        preparedStatement.setInt(1,purchsedQTY);
+        return preparedStatement.executeUpdate()>0;
     }
 }
