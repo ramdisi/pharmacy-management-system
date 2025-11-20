@@ -55,7 +55,6 @@ public class CheckoutServiceImpl implements CheckoutService {
                     }
                 }
             }
-            System.out.println(isOrderBillAdded & isStockUpdated);
             if (isOrderBillAdded & isStockUpdated) {
                 connection.commit();
             }

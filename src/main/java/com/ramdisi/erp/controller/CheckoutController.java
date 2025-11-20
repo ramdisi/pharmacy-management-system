@@ -7,6 +7,9 @@ import com.ramdisi.erp.model.dto.UserDTO;
 import com.ramdisi.erp.service.CheckoutService;
 import com.ramdisi.erp.service.impl.CheckoutServiceImpl;
 import com.ramdisi.erp.validation.Validator;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +20,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -112,6 +118,10 @@ public class CheckoutController implements Initializable {
     void btn_onAction_newOrder(ActionEvent event) {
         txt_payment.setText(null);
         txt_telNo.setText(null);
+        btn_proceedPayment.setDisable(false);
+        btn_cancelOrder.setDisable(false);
+        btn_addAnotherItemToBill.setDisable(false);
+        btn_removeSelectedFromCart.setDisable(false);
         lbl_balance.setText("Balance ");
         currenStage.close();
         CashierController.showCurrentStage();
@@ -140,6 +150,10 @@ public class CheckoutController implements Initializable {
                     lbl_balance.setText(String.format("Balance Rs.%.2f",Double.parseDouble(txt_payment.getText())-total));
                     txt_telNo.setText(null);
                     txt_payment.setText(null);
+                    btn_proceedPayment.setDisable(true);
+                    btn_cancelOrder.setDisable(true);
+                    btn_addAnotherItemToBill.setDisable(true);
+                    btn_removeSelectedFromCart.setDisable(true);
                 } catch (SQLException e) {
                     popup.setWindow("Something went wrong.Order didn't Placed.Try Again with new Order.\nError Id:005");
                     throw new RuntimeException(e);
@@ -151,7 +165,6 @@ public class CheckoutController implements Initializable {
     void btn_onAction_removeSelectedFromCart(ActionEvent event) {
         cartDTOs.remove(selectedItem);
         loadTable();
-
     }
 
     @FXML
@@ -168,7 +181,8 @@ public class CheckoutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
-
+        runClock();
+        lbl_cashierName.setText(cashierAuth.getName().toUpperCase());
     }
 
     private void countAmount() {
@@ -188,6 +202,12 @@ public class CheckoutController implements Initializable {
         col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
         col_pricePerItem.setCellValueFactory(new PropertyValueFactory<>("pricePerItem"));
         tblView_bill.setItems(cartDTOs);
+    }
+    private void runClock() {
+        lbl_time.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("hh : mm  a")));
+        Timeline clockJob = new Timeline(new KeyFrame(Duration.minutes(1), e-> lbl_time.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("hh : mm  a")))));
+        clockJob.setCycleCount(Animation.INDEFINITE);
+        clockJob.play();
     }
 }
 

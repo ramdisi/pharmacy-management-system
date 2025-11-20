@@ -32,8 +32,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CashierController implements Initializable {
@@ -100,6 +98,8 @@ public class CashierController implements Initializable {
     private static UserDTO cashierAuth;
 
     private Stage checkoutStage = new Stage();
+
+    private static boolean isReloadedTableAgain = true;//solution for reloading when new order placed
 
     @FXML
     private void btn_onAction_addToCart(ActionEvent event) {
@@ -183,8 +183,16 @@ public class CashierController implements Initializable {
 
     @FXML
     void table_onClick_selectItem(MouseEvent event) {
-        selectedItem = table_Items.getSelectionModel().getSelectedItem();
-        lbl_selectedItem.setText("Selected Item : "+selectedItem.getName());
+        if (!isReloadedTableAgain){
+            loadTable();
+            isReloadedTableAgain=true;
+        }else {
+            TableView.TableViewSelectionModel<CashierStockDTO> selectionModel = table_Items.getSelectionModel();
+            if (!selectionModel.isEmpty()){
+                selectedItem = selectionModel.getSelectedItem();
+                lbl_selectedItem.setText("Selected Item : " + selectedItem.getName());
+            }
+        }
     }
 
     @FXML
@@ -254,5 +262,6 @@ public class CashierController implements Initializable {
     }
     public static void cancelOrder(){
         cartList.clear();
+        isReloadedTableAgain = false;
     }
 }

@@ -40,6 +40,7 @@ public class PopupMassageController{
                 popupMassageController = fxmlLoader.getController();
                 stage.setScene(new Scene(root));
                 stage.setResizable(false);
+                stage.setAlwaysOnTop(true);
             } catch (IOException e) {
                 Platform.exit();
             }
