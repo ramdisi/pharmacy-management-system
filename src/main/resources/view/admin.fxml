@@ -101,7 +101,7 @@
                               <Insets bottom="10.0" />
                            </padding>
                         </JFXButton>
-                        <JFXButton maxWidth="1.7976931348623157E308" onAction="#btn_onAction_HRManagement" prefHeight="38.0" prefWidth="490.0" style="-fx-background-color: #00ADB5;" text="HR management" textFill="#eeeeee" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <JFXButton maxWidth="1.7976931348623157E308" onAction="#btn_onAction_promotionCampaign" prefHeight="38.0" prefWidth="490.0" style="-fx-background-color: #00ADB5;" text="Run a promotion Campaign" textFill="#eeeeee" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="33.0" />
                            </font>

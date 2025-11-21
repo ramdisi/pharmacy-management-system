@@ -43,6 +43,8 @@ public class LoginController {
                 case 2:
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin.fxml"))));
                     stage.show();
+                    AdminController.saveCurrentStage(stage);
+                    AdminController.setAdminDetails(new UserDTO(txt_username.getText(),txt_password.getText()));
                     currentStage.close();
                     break;
                 case 3:
